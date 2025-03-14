@@ -27,6 +27,8 @@ header
     color: azure;
     padding: 10px;
     text-align: center;
+    
+    position: fixed;
 }
 .headerNav{
     display: inline-flex;
@@ -139,6 +141,8 @@ footer{
     color: white;
     width: 100%;
     text-align: center;
+    
+    position: fixed;
 }
 .footerNav{
     justify-content: center;
