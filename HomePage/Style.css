@@ -1,0 +1,151 @@
+html, body {
+    height: 100%;
+    background-color: #333;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page
+{
+    width: 98vw;
+    height: 48vw;
+    display: grid;
+    grid-template-rows:10% 40% 40% 10%;
+    grid-template-columns: 10% 40% 40% 10%; 
+    
+}
+
+header
+{
+    grid-column: 1/5;
+    background-color: #333;
+    color: azure;
+    padding: 10px;
+    text-align: center;
+}
+.headerNav{
+    display: inline-flex;
+    justify-content: right;
+    align-content: right;
+    text-align: right;
+    list-style: none;
+}
+.headerListItem{
+    margin-left: 20px;
+    margin-top: -9px;
+    font-size: 24px;
+}
+.headerListItem:hover{
+    font-size: 32px;
+    text-decoration: underline;
+}
+
+
+nav
+{
+    grid-column: 1/2;
+    grid-row: 2/4;
+    background-color: azure;
+}
+.Nav01
+{
+    grid-column: 4/5;
+    grid-row: 2/4;
+    background-color: azure;
+}
+
+main
+{
+    background-image: url('../Images/MainWebsiteBackground.jpg');
+    grid-column: 2/4;
+    grid-row: 2/4;
+    align-content: center;
+    color: azure;
+}
+#mainHeadingOne
+{
+    align-content: center;
+    text-align: center;
+    font-weight: bolder;
+}
+.mainHeadingTwo{
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+#Name:hover{
+    background-color: azure;
+    color: #333;
+    font-size: larger;
+    font-size: larger;
+    padding: 7.5px;
+    font-size: larger;
+}
+.MainBoxchange{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    list-style-type: none;
+}
+.MainBoxchangeListItems{
+    margin-right: 20px;
+    background-color: azure;
+    color: #333;
+    border: 3px solid darkgrey;
+    align-content: center;
+    list-style-type: none;
+    padding: 5px;
+    font-size: 16px;
+}
+.MainBoxchangeListItems:hover{
+    padding: 7px;
+    font-size: 26px;
+    background-color: ghostwhite;
+    border-radius: 6px;
+    text-decoration: underline;
+    color: #333;
+    border-color: darkgray;
+}
+.shortDescription{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+    margin-top: 10px;
+    border: 3px solid #333;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    color: #333;
+    padding: 7px;
+    background-color: azure;
+}
+.shortDescription:hover{
+    background-color: azure;
+    font-size: larger;
+    font-size: larger;
+    padding: 20px;
+    border-radius: 3px;
+    font-size: larger;
+
+}
+
+footer{
+    grid-column: 1/4;
+    background-color: #333;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+.footerNav{
+    justify-content: center;
+    align-content: center;
+    list-style: none;
+    
+}
+.footerNav, li{
+    margin-bottom: 15px;
+}
