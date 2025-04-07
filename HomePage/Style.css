@@ -27,8 +27,8 @@ header
     color: azure;
     padding: 10px;
     text-align: center;
+
     
-    position: fixed;
 }
 .headerNav{
     display: inline-flex;
@@ -81,6 +81,10 @@ main
     align-items: center;
     text-align: center;
 }
+#Name{
+    background-color: red;
+    padding: 2px;
+}
 #Name:hover{
     background-color: azure;
     color: #333;
@@ -101,6 +105,7 @@ main
     color: #333;
     border: 3px solid darkgrey;
     align-content: center;
+    text-align: center;
     list-style-type: none;
     padding: 5px;
     font-size: 16px;
@@ -113,6 +118,7 @@ main
     text-decoration: underline;
     color: #333;
     border-color: darkgray;
+    text-align: center;
 }
 .shortDescription{
     margin-left: 10%;
@@ -141,13 +147,12 @@ footer{
     color: white;
     width: 100%;
     text-align: center;
-    
-    position: fixed;
 }
 .footerNav{
     justify-content: center;
     align-content: center;
     list-style: none;
+    
     
 }
 .footerNav, li{
