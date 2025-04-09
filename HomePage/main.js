@@ -17,8 +17,12 @@ function ChangeDescription(Choice) {
         break;
     }
 
-    p.innerHTML = text;
-    ButtonsClicked(Choice);
+    if (text != null) {
+        p.innerHTML = text;
+        ButtonsClicked(Choice);
+    }
+
+    
 }
 
 function ButtonsClicked(Choice){

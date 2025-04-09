@@ -36,11 +36,14 @@ header
     align-content: right;
     text-align: right;
     list-style: none;
+    margin-left: -20px;
 }
 .headerListItem{
     margin-left: 20px;
     margin-top: -9px;
     font-size: 24px;
+    color: azure;
+    text-decoration-color: azure;
 }
 .headerListItem:hover{
     font-size: 32px;
@@ -152,7 +155,7 @@ footer{
     justify-content: center;
     align-content: center;
     list-style: none;
-    
+    margin-left: 20px;
     
 }
 .footerNav, li{
