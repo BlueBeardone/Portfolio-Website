@@ -1,163 +1,137 @@
-html, body {
-    height: 100%;
-    background-color: #333;
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+:root {
+    --primary: #2A2A2A;
+    --secondary: #FF4D4D;
+    --accent: #4DABFF;
+    --text: #F5F5F5;
 }
 
-.page
-{
-    width: 98vw;
-    height: 48vw;
-    display: grid;
-    grid-template-rows:10% 40% 40% 10%;
-    grid-template-columns: 10% 40% 40% 10%; 
-    
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(45deg, var(--primary), #1A1A1A);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-header
-{
-    grid-column: 1/5;
-    background-color: #333;
-    color: azure;
-    padding: 10px;
-    text-align: center;
-
-    
-}
-.headerNav{
-    display: inline-flex;
-    justify-content: right;
-    align-content: right;
-    text-align: right;
-    list-style: none;
-    margin-left: -20px;
-}
-.headerListItem{
-    margin-left: 20px;
-    margin-top: -9px;
-    font-size: 24px;
-    color: azure;
-    text-decoration-color: azure;
-}
-.headerListItem:hover{
-    font-size: 32px;
-    text-decoration: underline;
-}
-
-
-nav
-{
-    grid-column: 1/2;
-    grid-row: 2/4;
-    background-color: azure;
-}
-.Nav01
-{
-    grid-column: 4/5;
-    grid-row: 2/4;
-    background-color: azure;
-}
-
-main
-{
-    background-image: url('../Images/MainWebsiteBackground.jpg');
-    grid-column: 2/4;
-    grid-row: 2/4;
-    align-content: center;
-    color: azure;
-}
-#mainHeadingOne
-{
-    align-content: center;
-    text-align: center;
-    font-weight: bolder;
-}
-.mainHeadingTwo{
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-}
-#Name{
-    background-color: red;
-    padding: 2px;
-}
-#Name:hover{
-    background-color: azure;
-    color: #333;
-    font-size: larger;
-    font-size: larger;
-    padding: 7.5px;
-    font-size: larger;
-}
-.MainBoxchange{
+.headerNav {
     display: flex;
     justify-content: center;
-    align-content: center;
-    list-style-type: none;
-}
-.MainBoxchangeListItems{
-    margin-right: 20px;
-    background-color: azure;
-    color: #333;
-    border: 3px solid darkgrey;
-    align-content: center;
-    text-align: center;
-    list-style-type: none;
-    padding: 5px;
-    font-size: 16px;
-}
-.MainBoxchangeListItems:hover{
-    padding: 7px;
-    font-size: 26px;
-    background-color: ghostwhite;
-    border-radius: 6px;
-    text-decoration: underline;
-    color: #333;
-    border-color: darkgray;
-    text-align: center;
-}
-.shortDescription{
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 5%;
-    margin-top: 10px;
-    border: 3px solid #333;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
-    color: #333;
-    padding: 7px;
-    background-color: azure;
-}
-.shortDescription:hover{
-    background-color: azure;
-    font-size: larger;
-    font-size: larger;
-    padding: 20px;
-    border-radius: 3px;
-    font-size: larger;
-
-}
-
-footer{
-    grid-column: 1/4;
-    background-color: #333;
-    color: white;
+    padding: 1.5rem;
+    gap: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    position: fixed;
     width: 100%;
+    top: 0;
+    list-style: none;
+}
+
+.headerListItem a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: 0.3s;
+}
+
+.headerListItem a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: 0.3s;
+    font-size: larger;
+}
+
+.headerListItem a:hover::after {
+    width: 100%;
+    font-size: larger;
+}
+
+main {
+    margin-top: 120px;
+    padding: 2rem;
     text-align: center;
 }
-.footerNav{
-    justify-content: center;
-    align-content: center;
-    list-style: none;
-    margin-left: 20px;
-    
+
+#mainHeadingOne {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--secondary), var(--accent));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: slideIn 1s ease;
 }
-.footerNav, li{
-    margin-bottom: 15px;
+
+#Name {
+    color: var(--secondary);
+    text-shadow: 0 0 15px rgba(92, 77, 255, 0.5);
+}
+
+.MainBoxchange {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0;
+    list-style: none;
+    margin: 3rem 0;
+}
+
+.MainBoxchangeListItems {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid var(--accent);
+    color: var(--text);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.MainBoxchangeListItems:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(77,171,255,0.3);
+    background: var(--accent);
+}
+
+.shortDescription {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(0,0,0,0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s;
+}
+
+.shortDescription.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+footer {
+    background: rgba(0,0,0,0.3);
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+    list-style: none;
+    text-decoration: none;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    #mainHeadingOne { font-size: 2.5rem; }
+    .MainBoxchange { flex-direction: column; }
 }
