@@ -1,7 +1,15 @@
 const descriptions = [
-    "Proficient in modern web technologies including JavaScript, HTML5, and CSS3. Experienced with frameworks like React and Vue.js. Strong background in backend development with Node.js and Python. Passionate about creating efficient, scalable solutions with clean code architecture.",
-    "3+ years experience in software development. Currently working on innovative SaaS solutions. Previously contributed to open-source projects and participated in hackathons. Continuously learning and adapting to new technologies in the fast-paced tech industry.",
-    "Creative problem-solver with a passion for game development and interactive experiences. When not coding, I enjoy contributing to indie game projects and exploring new technologies. Committed to writing maintainable code and creating impactful digital experiences."
+    "<div class='skills-description'>" +
+        "Proficient in core development technologies including:" +
+    "<ul class='skills-list'>" +
+            "<li>C#</li>" +
+            "<li>HTML, CSS, JavaScript</li>" +
+            "<li>MySQL, SQL & Access</li>" +
+            "<li>Python</li>" +
+        "</ul>" +
+        "Experienced in building full-stack applications and database-driven solutions.",
+        "Studied software engineering at BelgiumCampus iTversity, gaining strong foundational knowledge in system design and development principles. 3+ years experience in software development with hands-on project work. Currently working on VR and Drone Technologies. Contributed to open-source projects, participated in hackathons and GameJams and I have also joined many different webinars to stay up to date with the ever evolving technology.",
+        "Creative problem-solver with a passion for game development and interactive experiences. When not coding, I enjoy contributing to indie game projects and exploring new technologies. Committed to writing maintainable code and creating impactful digital experiences."
 ];
 
 function ChangeDescription(index) {
@@ -9,7 +17,7 @@ function ChangeDescription(index) {
     descElement.classList.remove('active');
     
     setTimeout(() => {
-        descElement.textContent = descriptions[index];
+        descElement.innerHTML = descriptions[index];
         descElement.classList.add('active');
     }, 300);
 }

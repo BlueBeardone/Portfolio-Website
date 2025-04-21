@@ -69,8 +69,8 @@ main {
 }
 
 #Name {
-    color: var(--secondary);
-    text-shadow: 0 0 15px rgba(92, 77, 255, 0.5);
+    color: blue;
+    text-shadow: 0 0 15px rgba(255, 77, 77, 0.7);
 }
 
 .MainBoxchange {
@@ -124,6 +124,43 @@ footer {
     margin-top: auto;
     list-style: none;
     text-decoration: none;
+}
+
+.skills-description {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.skills-description::before {
+    content: "🛠️ ";
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+    
+}
+
+.skills-list li {
+    padding: 1rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    position: relative;
+    padding-left: 2.5rem;
+}
+
+.skills-list li::before {
+    content: "▹";
+    position: absolute;
+    left: 1rem;
+    color: var(--secondary);
 }
 
 @keyframes slideIn {
