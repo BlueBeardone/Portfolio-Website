@@ -2,7 +2,7 @@ const descriptions = [
     `<div class='skills-description'>
         Proficient in core development technologies including:
         <ul class='skills-list'>
-            <li>C#</li>
+            <li>C#, Java</li>
             <li>HTML, CSS, JavaScript</li>
             <li>MySQL, SQL & Access</li>
             <li>Python</li>
