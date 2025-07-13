@@ -12,20 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Matrix characters with more variety
+    // Matrix characters
     const chars = "01アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const charArray = chars.split("");
     
     // 3D effect parameters
     const baseFontSize = 14;
     const fontSizeRange = 10;
-    const columns = canvas.width / baseFontSize;
+    const columns = Math.ceil(canvas.width / baseFontSize);
     
     // Each column drops from a random starting point
     const drops = [];
     for (let i = 0; i < columns; i++) {
         drops[i] = {
-            y: Math.floor(Math.random() * canvas.height / baseFontSize),
+            y: Math.floor(Math.random() * canvas.height / baseFontSize) * -1,
             speed: 0.5 + Math.random() * 1.5,
             fontSize: baseFontSize + Math.random() * fontSizeRange,
             scale: 0.8 + Math.random() * 0.4
@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Matrix colors with depth variation
     const depthColors = [
-        {color: '#0F0', opacity: 0.15},
-        {color: '#0A0', opacity: 0.4},
-        {color: '#0D0', opacity: 0.7},
-        {color: '#0C0', opacity: 1}
+        {color: [15, 240, 15], opacity: 0.15},   // Far (dim green)
+        {color: [10, 200, 10], opacity: 0.4},    // Medium
+        {color: [13, 230, 13], opacity: 0.7},    // Close
+        {color: [12, 255, 12], opacity: 1}       // Very close (bright green)
     ];
     
     function drawMatrix() {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const x = i * baseFontSize;
             const y = drop.y * baseFontSize;
             
-            // Determine depth layer (0-3) based on font size
+            // Determine depth layer
             const depth = Math.min(3, Math.floor((drop.fontSize - baseFontSize) / (fontSizeRange / 4)));
             const colorInfo = depthColors[depth];
             
@@ -61,29 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.scale(drop.scale, drop.scale);
             
             ctx.font = `${drop.fontSize}px monospace`;
+            ctx.fillStyle = `rgba(${colorInfo.color[0]}, ${colorInfo.color[1]}, ${colorInfo.color[2]}, ${colorInfo.opacity})`;
             
-            // Fixed color calculation
-            const r = parseInt(colorInfo.color.slice(1, 3), 16);
-            const g = parseInt(colorInfo.color.slice(3, 5), 16);
-            const b = parseInt(colorInfo.color.slice(5, 7), 16);
-            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${colorInfo.opacity})`;
-            
-            // Draw character with depth-based offset
+            // Draw character
             ctx.fillText(char, 0, 0);
             ctx.restore();
             
             // Move drops at different speeds
             drop.y += drop.speed;
             
-            // Reset drops that reach bottom + random reset
-            if (y > canvas.height && Math.random() > 0.97) {
-                drop.y = 0;
+            // Reset drops that reach bottom
+            if (y > canvas.height * 1.5) {
+                drop.y = -20;
                 drop.fontSize = baseFontSize + Math.random() * fontSizeRange;
                 drop.speed = 0.5 + Math.random() * 1.5;
                 drop.scale = 0.8 + Math.random() * 0.4;
             }
         }
+        
+        requestAnimationFrame(drawMatrix);
     }
 
-    setInterval(drawMatrix, 50);
+    drawMatrix();
 });

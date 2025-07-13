@@ -16,6 +16,61 @@ const descriptions = [
         <div class="skills-highlight">
             <strong>Specialized in:</strong> Full-stack development, game design, and immersive technology solutions
         </div>
+    </div>`,
+
+    // Enhanced History section
+    `<div class="history-section">
+        <h3>Education</h3>
+        <ul class="history-list">
+            <li>
+                <strong>BelgiumCampus iTversity</strong> - Software Engineering
+                <br><em>2021 - Present</em>
+                <br>Studying software engineering with focus on system design and development principles
+            </li>
+        </ul>
+
+        <h3>Work Experience</h3>
+        <ul class="history-list">
+            <li>
+                <strong>VR and Drone Technologies</strong> - Software Developer
+                <br><em>2023 - Present</em>
+                <br>Developing software solutions for VR applications and drone control systems
+            </li>
+            <li>
+                <strong>Freelance Developer</strong>
+                <br><em>2020 - 2023</em>
+                <br>Created custom web solutions and database applications for local businesses
+            </li>
+        </ul>
+
+        <h3>Achievements</h3>
+        <ul class="history-list">
+            <li>Contributed to projects on GitHub</li>
+            <li>Participated in 3 hackathons and 2 GameJams</li>
+            <li>Completed 15+ technical webinars on emerging technologies</li>
+        </ul>
+    </div>`,
+
+    // Enhanced About section
+    `<div class="about-section">
+        <p>Creative problem-solver with a passion for game development and interactive experiences.</p>
+        
+        <h3>Personal Interests</h3>
+        <ul class="about-list">
+            <li>Game Development: Working on indie game projects in Unreal Engine</li>
+            <li>Technology Exploration: VR, drone tech, AI applications and new emerging technologies</li>
+        </ul>
+
+        <h3>Values</h3>
+        <p>Committed to writing clean, maintainable code and creating impactful digital experiences that make a difference.</p>
+        
+        <h3>Currently Learning</h3>
+        <ul class="about-list">
+            <li>Advanced Unity development</li>
+            <li>Rasberry Pi development and electronic connections</li>
+            <li>Cloud computing with AWS</li>
+            <li>Advanced Machine learning</li>
+        </ul>
     </div>`
 ];
 
