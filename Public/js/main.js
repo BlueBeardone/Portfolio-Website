@@ -1,16 +1,22 @@
 const descriptions = [
     `<div class='skills-description'>
-        Proficient in core development technologies including:
+        <h3>Technical Proficiencies</h3>
         <ul class='skills-list'>
-            <li>C#, Java</li>
-            <li>HTML, CSS, JavaScript</li>
-            <li>MySQL, SQL & Access</li>
-            <li>Python</li>
+            <li><strong>C# & .NET</strong> - Advanced application development</li>
+            <li><strong>Web Technologies</strong> - HTML5, CSS3, JavaScript/ES6+</li>
+            <li><strong>Database Systems</strong> - MySQL, SQL Server, MongoDB</li>
+            <li><strong>Python</strong> - Data analysis & automation</li>
+            <li><strong>Game Development</strong> - Unity, Unreal Engine</li>
+            <li><strong>Frontend Frameworks</strong> - React, Vue.js</li>
+            <li><strong>Backend Technologies</strong> - Node.js, Express</li>
+            <li><strong>Cloud Platforms</strong> - Azure, AWS</li>
+            <li><strong>DevOps</strong> - Docker, CI/CD pipelines</li>
+            <li><strong>Emerging Tech</strong> - VR/AR, Drone Programming</li>
         </ul>
-        Experienced in building full-stack applications and database-driven solutions.
-    </div>`,
-    `Studied software engineering at BelgiumCampus iTversity, gaining strong foundational knowledge in system design and development principles. 3+ years experience in software development with hands-on project work. Currently working on VR and Drone Technologies. Contributed to open-source projects, participated in hackathons and GameJams and I have also joined many different webinars to stay up to date with the ever evolving technology.`,
-    `Creative problem-solver with a passion for game development and interactive experiences. When not coding, I enjoy contributing to indie game projects and exploring new technologies. Committed to writing maintainable code and creating impactful digital experiences.`
+        <div class="skills-highlight">
+            <strong>Specialized in:</strong> Full-stack development, game design, and immersive technology solutions
+        </div>
+    </div>`
 ];
 
 function ChangeDescription(index) {

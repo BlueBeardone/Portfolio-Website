@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barend Blom</title>
+    <title>Barend Blom - Software Engineer</title>
     <link rel="stylesheet" href="/css/Style.css">
+    <script src="/js/matrix.js" defer></script>
     <script src="/js/main.js" defer></script>
+    <style>
+        /* Add subtle animation to content */
+        main {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body class="page">
     <header>
@@ -28,9 +46,7 @@
             <li><button class="MainBoxchangeListItems" onclick="ChangeDescription(2)">About</button></li>
         </ul>
         
-        <p class="shortDescription" id="description">
-            <!-- Content will be populated by JavaScript -->
-        </p>
+        <p class="shortDescription" id="description"></p>
     </main>
 
     <footer>

@@ -1,39 +1,87 @@
+/* public/css/Style.css */
 :root {
     --primary: #2A2A2A;
     --secondary: #FF4D4D;
     --accent: #4DABFF;
     --text: #F5F5F5;
+    --content-bg: rgba(10, 10, 15, 0.85);
+    --content-border: rgba(77, 171, 255, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(45deg, var(--primary), #1A1A1A);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000;
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+/* Matrix Canvas */
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Content Containers */
+header, main, footer {
+    position: relative;
+    z-index: 20;
+    background: var(--content-bg);
+    border-radius: 15px;
+    margin: 20px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--content-border);
+    animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header Styles */
+header {
+    padding: 18px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: calc(100% - 40px);
+    z-index: 30;
 }
 
 .headerNav {
     display: flex;
     justify-content: center;
-    padding: 1.5rem;
-    gap: 2rem;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    top: 0;
+    padding: 0;
+    gap: 2.5rem;
     list-style: none;
 }
 
 .headerListItem a {
     color: var(--text);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     position: relative;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     transition: 0.3s;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px rgba(77, 171, 255, 0.7);
 }
 
 .headerListItem a::after {
@@ -44,72 +92,112 @@ body {
     width: 0;
     height: 2px;
     background: var(--secondary);
-    transition: 0.3s;
-    font-size: larger;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .headerListItem a:hover::after {
     width: 100%;
-    font-size: larger;
 }
 
+/* Main Content Styles */
 main {
-    margin-top: 120px;
-    padding: 2rem;
+    margin-top: 140px;
+    padding: 40px 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #mainHeadingOne {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    font-size: 4.5rem;
+    margin-bottom: 1.5rem;
     background: linear-gradient(45deg, var(--secondary), var(--accent));
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: slideIn 1s ease;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.mainHeadingTwo {
+    font-size: 1.8rem;
+    margin: 0.8rem 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
 #Name {
-    color: blue;
-    text-shadow: 0 0 15px rgba(255, 77, 77, 0.7);
+    color: #4DABFF;
+    text-shadow: 0 0 25px rgba(77, 171, 255, 0.9);
+    font-weight: 700;
 }
 
 .MainBoxchange {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 2.5rem;
     padding: 0;
     list-style: none;
-    margin: 3rem 0;
+    margin: 3.5rem 0;
 }
 
 .MainBoxchangeListItems {
-    background: rgba(255,255,255,0.1);
-    border: 2px solid var(--accent);
+    background: rgba(20, 30, 50, 0.9) !important;
+    border: 2px solid var(--accent) !important;
     color: var(--text);
-    padding: 1rem 2rem;
+    padding: 1.2rem 2.5rem;
     border-radius: 50px;
     cursor: pointer;
-    transition: 0.3s;
-    font-weight: bold;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    min-width: 160px;
 }
 
 .MainBoxchangeListItems:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(77,171,255,0.3);
-    background: var(--accent);
+    transform: translateY(-7px);
+    box-shadow: 0 10px 25px rgba(77, 171, 255, 0.6);
+    background: rgba(77, 171, 255, 0.95) !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
 .shortDescription {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: rgba(0,0,0,0.3);
+    max-width: 850px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: rgba(20, 20, 30, 0.75);
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.1);
-    line-height: 1.6;
+    border: 1px solid rgba(77, 171, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    line-height: 1.7;
+    text-align: left;
+    font-size: 1.1rem;
     opacity: 0;
     transform: translateY(20px);
-    transition: 0.5s;
+    transition: 0.5s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.shortDescription::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
 }
 
 .shortDescription.active {
@@ -117,58 +205,146 @@ main {
     transform: translateY(0);
 }
 
-footer {
-    background: rgba(0,0,0,0.3);
-    padding: 2rem;
-    text-align: center;
-    margin-top: auto;
-    list-style: none;
-    text-decoration: none;
-}
-
 .skills-description {
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    position: relative;
+    padding-left: 40px;
 }
 
 .skills-description::before {
-    content: "🛠️ ";
-    font-size: 1.5rem;
-    vertical-align: middle;
+    content: "🛠️";
+    position: absolute;
+    left: 0;
+    top: -5px;
+    font-size: 2rem;
 }
 
 .skills-list {
     list-style: none;
     padding: 0;
     display: grid;
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.2rem;
     text-align: left;
-    max-width: 500px;
-    margin: 0 auto;
-    
+    margin: 2rem 0;
 }
 
 .skills-list li {
-    padding: 1rem;
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
+    padding: 1.3rem;
+    background: rgba(30, 40, 60, 0.6);
+    border-radius: 12px;
     position: relative;
-    padding-left: 2.5rem;
+    padding-left: 3rem;
+    border: 1px solid rgba(77, 171, 255, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.skills-list li:hover {
+    transform: translateX(5px);
+    background: rgba(40, 50, 70, 0.7);
+    border-color: rgba(77, 171, 255, 0.3);
 }
 
 .skills-list li::before {
     content: "▹";
     position: absolute;
-    left: 1rem;
-    color: var(--secondary);
+    left: 1.5rem;
+    color: var(--accent);
+    font-size: 1.5rem;
 }
 
-@keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+.skills-list li strong {
+    color: var(--accent);
+    font-weight: 600;
 }
 
-@media (max-width: 768px) {
-    #mainHeadingOne { font-size: 2.5rem; }
-    .MainBoxchange { flex-direction: column; }
+/* Footer Styles */
+footer {
+    padding: 25px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.footerNav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.footerNav li {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    #mainHeadingOne {
+        font-size: 3.5rem;
+    }
+    
+    .MainBoxchange {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .MainBoxchangeListItems {
+        width: 80%;
+        max-width: 300px;
+    }
+    
+    .footerNav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #mainHeadingOne {
+        font-size: 2.8rem;
+    }
+    
+    .mainHeadingTwo {
+        font-size: 1.5rem;
+    }
+    
+    header, main, footer {
+        margin: 15px;
+    }
+    
+    .headerNav {
+        gap: 1.2rem;
+    }
+    
+    .headerListItem a {
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+    
+    .shortDescription {
+        padding: 1.8rem;
+    }
+}
+
+@media (max-width: 400px) {
+    #mainHeadingOne {
+        font-size: 2.3rem;
+    }
+    
+    .mainHeadingTwo {
+        font-size: 1.3rem;
+    }
+    
+    .MainBoxchangeListItems {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
 }
