@@ -24,7 +24,7 @@ const descriptions = [
         <ul class="history-list">
             <li>
                 <strong>BelgiumCampus iTversity</strong> - Software Engineering
-                <br><em>2021 - Present</em>
+                <br><em>2023 - Present</em>
                 <br>Studying software engineering with focus on system design and development principles
             </li>
         </ul>
@@ -33,12 +33,12 @@ const descriptions = [
         <ul class="history-list">
             <li>
                 <strong>VR and Drone Technologies</strong> - Software Developer
-                <br><em>2023 - Present</em>
+                <br><em>2025 - Present</em>
                 <br>Developing software solutions for VR applications and drone control systems
             </li>
             <li>
                 <strong>Freelance Developer</strong>
-                <br><em>2020 - 2023</em>
+                <br><em>2022 - Present</em>
                 <br>Created custom web solutions and database applications for local businesses
             </li>
         </ul>
