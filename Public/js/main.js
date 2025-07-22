@@ -38,7 +38,7 @@ const descriptions = [
             </li>
             <li>
                 <strong>Freelance Developer</strong>
-                <br><em>2022 - Present</em>
+                <br><em>2024 - Present</em>
                 <br>Created custom web solutions and database applications for local businesses
             </li>
         </ul>
@@ -47,7 +47,7 @@ const descriptions = [
         <ul class="history-list">
             <li>Contributed to projects on GitHub</li>
             <li>Participated in 3 hackathons and 2 GameJams</li>
-            <li>Completed 15+ technical webinars on emerging technologies</li>
+            <li>Completed a few technical webinars on emerging technologies</li>
         </ul>
     </div>`,
 
