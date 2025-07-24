@@ -453,6 +453,7 @@ footer {
     background: var(--pdf);
     color: white;
     width: 250px;
+    align-self: center;
     text-align: center;
 }
 
