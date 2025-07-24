@@ -455,6 +455,7 @@ footer {
     width: 250px;
     align-self: center;
     text-align: center;
+    right: 50%;
 }
 
 .pdf-btn:hover {
