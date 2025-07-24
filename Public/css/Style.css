@@ -426,11 +426,14 @@ footer {
 }
 
 .header-btn {
+    /* Reduce padding from 12px 24px to 8px 16px */
+    padding: 8px 16px; 
+    /* Reduce font size from 1.05rem to 0.9rem */
+    font-size: 0.9rem; 
+    /* Keep existing styles below */
     background: white;
     color: var(--primary);
     border: none;
-    padding: 12px 24px;
-    font-size: 1.05rem;
     font-weight: 600;
     border-radius: 50px;
     cursor: pointer;
