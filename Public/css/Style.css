@@ -444,11 +444,13 @@ footer {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     text-decoration: none;
     z-index: 10;
+    
 }
 
 .pdf-btn {
     background: var(--pdf);
     color: white;
+    width: 50%;
 }
 
 .pdf-btn:hover {
