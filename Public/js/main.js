@@ -12,9 +12,10 @@ const descriptions = [
             <li><strong>Cloud Platforms</strong> - Azure, AWS</li>
             <li><strong>DevOps</strong> - Docker, CI/CD pipelines</li>
             <li><strong>Emerging Tech</strong> - VR/AR, Drone Programming</li>
+            <li><strong>Temporal</strong> - Durable code executions</li>
         </ul>
         <div class="skills-highlight">
-            <strong>Specialized in:</strong> Full-stack development, game design, and immersive technology solutions
+            <strong>Specialized in:</strong> Full-stack development
         </div>
     </div>`,
 
@@ -33,7 +34,7 @@ const descriptions = [
         <ul class="history-list">
             <li>
                 <strong>VR and Drone Technologies</strong> - Software Developer
-                <br><em>2025 - Present</em>
+                <br><em>mid of 2025 - end of 2025</em>
                 <br>Developing software solutions for VR applications and drone control systems
             </li>
             <li>
@@ -41,13 +42,19 @@ const descriptions = [
                 <br><em>2024 - Present</em>
                 <br>Created custom web solutions and database applications for local businesses
             </li>
+            <li>
+                <strong>Internship at Eps-Mathu</strong> - Junior Developer
+                <br><em>2026 - present</em>
+                <br>Assisted in developing a website and database management system
+            </li>
         </ul>
 
         <h3>Achievements</h3>
         <ul class="history-list">
             <li>Contributed to projects on GitHub</li>
-            <li>Participated in 3 hackathons and 2 GameJams</li>
+            <li>Participated in 3 hackathons and a few GameJams</li>
             <li>Completed a few technical webinars on emerging technologies</li>
+            <li>Completed the Temporal Fundamentals Certification</li>
         </ul>
     </div>`,
 
@@ -57,7 +64,7 @@ const descriptions = [
         
         <h3>Personal Interests</h3>
         <ul class="about-list">
-            <li>Game Development: Working on indie game projects in Unreal Engine</li>
+            <li>Game Development: Working on indie game projects in Unreal Engine and Unity</li>
             <li>Technology Exploration: VR, drone tech, AI applications and new emerging technologies</li>
         </ul>
 
@@ -70,6 +77,7 @@ const descriptions = [
             <li>Rasberry Pi development and electronic connections</li>
             <li>Cloud computing with AWS</li>
             <li>Advanced Machine learning</li>
+            <li>Temporal for building durable code that does not rely on external dependencies</li>
         </ul>
     </div>`
 ];
