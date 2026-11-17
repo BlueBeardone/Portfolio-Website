@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:portfolio/data/launcher.dart';
 import 'package:portfolio/models/profile.dart';
 import 'package:portfolio/ui/identity_panel.dart';
+import 'package:portfolio/ui/widgets/link_row.dart';
+import 'package:portfolio/ui/widgets/pdf_button.dart';
 
 import '../support/fixtures.dart';
 
@@ -104,5 +106,41 @@ void main() {
     ));
     await tester.tap(find.text('GitHub'), kind: PointerDeviceKind.mouse);
     expect(opened, ['https://github.com/BlueBeardone']);
+  });
+
+  testWidgets('an empty email renders no blank row', (tester) async {
+    final noEmail = profileWith(
+      contact: const Contact(email: '', phone: ''),
+    );
+    await tester.pumpWidget(wrap(
+      IdentityPanel(profile: noEmail, theme: sampleTheme, onOpenLink: (_) {}),
+    ));
+
+    expect(find.byType(LinkRow), findsNWidgets(noEmail.links.length));
+    expect(find.text(''), findsNothing);
+  });
+
+  testWidgets('PDF buttons share a height even when a label wraps', (tester) async {
+    final pdfs = profileWith(
+      pdfs: const [
+        PdfItem(label: 'Download my full curriculum vitae', asset: 'a.pdf'),
+        PdfItem(label: 'Grades', asset: 'b.pdf'),
+      ],
+    );
+    await tester.pumpWidget(wrap(
+      IdentityPanel(profile: pdfs, theme: sampleTheme, onDownloadPdf: (_) {}),
+      size: const Size(320, 900),
+    ));
+    tester.view.physicalSize = const Size(320, 900);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+    await tester.pump();
+
+    final buttons = find.byType(PdfButton);
+    expect(buttons, findsNWidgets(2));
+    final first = tester.getSize(buttons.at(0)).height;
+    final second = tester.getSize(buttons.at(1)).height;
+    expect(first, closeTo(second, 0.5));
+    expect(tester.takeException(), isNull);
   });
 }

@@ -64,30 +64,36 @@ class IdentityPanel extends StatelessWidget {
             onTap: onOpenLink ?? openUrl,
           ),
         ),
-        LinkRow(
-          label: profile.contact.email,
-          url: 'mailto:${profile.contact.email}',
-          onTap: onOpenLink ?? openUrl,
-        ),
+        if (profile.contact.email.isNotEmpty)
+          LinkRow(
+            label: profile.contact.email,
+            url: 'mailto:${profile.contact.email}',
+            onTap: onOpenLink ?? openUrl,
+          ),
         if (profile.contact.phone.isNotEmpty)
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Text(profile.contact.phone, style: muted),
           ),
         const SizedBox(height: 28),
-        Row(
-          children: [
-            for (var i = 0; i < profile.pdfs.length; i++) ...[
-              if (i > 0) const SizedBox(width: 10),
-              Expanded(
-                child: PdfButton(
-                  label: profile.pdfs[i].label,
-                  asset: profile.pdfs[i].asset,
-                  onTap: onDownloadPdf ?? downloadAsset,
+        // IntrinsicHeight + stretch gives every button the height of the
+        // longest label, so a wrapped label does not leave a ragged pair.
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (var i = 0; i < profile.pdfs.length; i++) ...[
+                if (i > 0) const SizedBox(width: 10),
+                Expanded(
+                  child: PdfButton(
+                    label: profile.pdfs[i].label,
+                    asset: profile.pdfs[i].asset,
+                    onTap: onDownloadPdf ?? downloadAsset,
+                  ),
                 ),
-              ),
+              ],
             ],
-          ],
+          ),
         ),
       ],
     );
