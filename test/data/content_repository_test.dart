@@ -23,7 +23,10 @@ void main() {
 
     expect(content.skills.items, hasLength(7));
     expect(content.skills.items.first.name, 'Frontend');
-    expect(content.skills.items.first.detail, contains('Flutter'));
+    expect(
+      content.skills.items.first.detail,
+      'HTML5, CSS3, JavaScript (ES6+), React, Flutter',
+    );
     expect(content.skills.items[1].detail, contains('RESTful APIs'));
     expect(content.skills.highlight, contains('full-stack'));
 

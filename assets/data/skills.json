@@ -2,7 +2,7 @@
   "_hint": "The Skills tab. Add or remove items freely; order is the order shown.",
   "highlight": "Specialised in full-stack development",
   "items": [
-    { "name": "Frontend", "detail": "HTML5, CSS3, JavaScript (ES6+), React, Vue.js, Flutter" },
+    { "name": "Frontend", "detail": "HTML5, CSS3, JavaScript (ES6+), React, Flutter" },
     { "name": "Backend", "detail": "Node.js, Express, RESTful APIs" },
     { "name": "Databases", "detail": "MySQL, SQL Server, MongoDB" },
     { "name": "Game development", "detail": "Unity" },
