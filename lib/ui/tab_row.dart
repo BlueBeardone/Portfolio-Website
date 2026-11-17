@@ -35,36 +35,37 @@ class TabRow extends StatelessWidget {
       },
       child: Focus(
         autofocus: true,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        child: Wrap(
+          spacing: 22,
+          runSpacing: 4,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             for (var i = 0; i < labels.length; i++)
-              Padding(
-                padding: EdgeInsets.only(right: i == labels.length - 1 ? 0 : 22),
-                child: InkWell(
-                  onTap: () => onSelect(i),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 8, top: 4),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          labels[i],
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: i == selected ? accent : muted,
-                            letterSpacing: 1.2,
-                            fontWeight: i == selected ? FontWeight.w600 : FontWeight.w400,
-                          ),
+              InkWell(
+                onTap: () => onSelect(i),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8, top: 4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        labels[i],
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: i == selected ? accent : muted,
+                          letterSpacing: 1.2,
+                          fontWeight: i == selected
+                              ? FontWeight.w600
+                              : FontWeight.w400,
                         ),
-                        const SizedBox(height: 6),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 180),
-                          height: 1,
-                          width: i == selected ? 22 : 0,
-                          color: accent,
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 6),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 180),
+                        height: 1,
+                        width: i == selected ? 22 : 0,
+                        color: accent,
+                      ),
+                    ],
                   ),
                 ),
               ),

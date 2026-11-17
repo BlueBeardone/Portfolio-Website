@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:portfolio/data/content_repository.dart';
 import 'package:portfolio/models/about.dart';
 import 'package:portfolio/models/history.dart';
@@ -9,6 +10,7 @@ import 'package:portfolio/models/site_content.dart';
 import 'package:portfolio/models/site_theme.dart';
 import 'package:portfolio/models/skills.dart';
 import 'package:portfolio/theme/app_theme.dart';
+import 'package:portfolio/ui/portfolio_page.dart';
 
 /// Loads the real `assets/data/*.json` files, so widget tests run against the
 /// same content the site ships with.
@@ -53,4 +55,22 @@ Widget wrap(Widget child, {SiteTheme? theme, Size size = const Size(900, 900)}) 
       body: SizedBox(width: size.width, height: size.height, child: child),
     ),
   );
+}
+
+/// Pumps the real page at [size] with [disableAnimations] on, so the matrix
+/// ticker does not keep `pumpAndSettle` spinning forever.
+Future<void> pumpAt(WidgetTester tester, Size size) async {
+  tester.view.physicalSize = size;
+  tester.view.devicePixelRatio = 1.0;
+  addTearDown(tester.view.reset);
+  await tester.pumpWidget(
+    MediaQuery(
+      data: MediaQueryData(disableAnimations: true, size: size),
+      child: MaterialApp(
+        theme: buildThemeData(sampleTheme),
+        home: PortfolioPage(content: sampleContent),
+      ),
+    ),
+  );
+  await tester.pump();
 }
