@@ -15,6 +15,79 @@ Color parseHexColor(String value) {
   return Color(hex.length == 6 ? 0xFF000000 | parsed : parsed);
 }
 
+
+/// A positive number, or a data error naming the field. A zero font size or
+/// breakpoint would otherwise reach the layout code as an uncaught error and
+/// blank the page.
+double _positiveNumber(
+  Map<String, dynamic> json,
+  String key, {
+  required String file,
+  required String path,
+}) {
+  final value = readDouble(json, key, file: file, path: path);
+  if (!value.isFinite || value <= 0) {
+    throw DataException(
+      file: file,
+      path: joinPath(path, key),
+      message: 'expected a number greater than 0, got $value',
+    );
+  }
+  return value;
+}
+
+double _nonNegativeNumber(
+  Map<String, dynamic> json,
+  String key, {
+  required String file,
+  required String path,
+}) {
+  final value = readDouble(json, key, file: file, path: path);
+  if (!value.isFinite || value < 0) {
+    throw DataException(
+      file: file,
+      path: joinPath(path, key),
+      message: 'expected a number of at least 0, got $value',
+    );
+  }
+  return value;
+}
+
+/// A number in `[0, 1]`, the only range an opacity or width factor can mean.
+double _fraction(
+  Map<String, dynamic> json,
+  String key, {
+  required String file,
+  required String path,
+}) {
+  final value = readDouble(json, key, file: file, path: path);
+  if (!value.isFinite || value < 0 || value > 1) {
+    throw DataException(
+      file: file,
+      path: joinPath(path, key),
+      message: 'expected a number between 0 and 1, got $value',
+    );
+  }
+  return value;
+}
+
+int _positiveInt(
+  Map<String, dynamic> json,
+  String key, {
+  required String file,
+  required String path,
+}) {
+  final value = readInt(json, key, file: file, path: path);
+  if (value < 1) {
+    throw DataException(
+      file: file,
+      path: joinPath(path, key),
+      message: 'expected a whole number of at least 1, got $value',
+    );
+  }
+  return value;
+}
+
 class SiteColors {
   const SiteColors({
     required this.background,
@@ -74,12 +147,12 @@ class SiteLayout {
   final double identityWidthFactor;
 
   factory SiteLayout.fromJson(Map<String, dynamic> json, {required String file, String path = ''}) {
-    double number(String key) => readDouble(json, key, file: file, path: path);
     return SiteLayout(
-      breakpoint: number('breakpoint'),
-      maxContentWidth: number('maxContentWidth'),
-      pagePadding: number('pagePadding'),
-      identityWidthFactor: number('identityWidthFactor'),
+      breakpoint: _positiveNumber(json, 'breakpoint', file: file, path: path),
+      maxContentWidth: _positiveNumber(json, 'maxContentWidth', file: file, path: path),
+      pagePadding: _nonNegativeNumber(json, 'pagePadding', file: file, path: path),
+      identityWidthFactor:
+          _fraction(json, 'identityWidthFactor', file: file, path: path),
     );
   }
 }
@@ -100,13 +173,12 @@ class SiteTypography {
   final double smallSize;
 
   factory SiteTypography.fromJson(Map<String, dynamic> json, {required String file, String path = ''}) {
-    double number(String key) => readDouble(json, key, file: file, path: path);
     return SiteTypography(
-      heroDesktop: number('heroDesktop'),
-      heroMobile: number('heroMobile'),
-      nameTracking: number('nameTracking'),
-      bodySize: number('bodySize'),
-      smallSize: number('smallSize'),
+      heroDesktop: _positiveNumber(json, 'heroDesktop', file: file, path: path),
+      heroMobile: _positiveNumber(json, 'heroMobile', file: file, path: path),
+      nameTracking: readDouble(json, 'nameTracking', file: file, path: path),
+      bodySize: _positiveNumber(json, 'bodySize', file: file, path: path),
+      smallSize: _positiveNumber(json, 'smallSize', file: file, path: path),
     );
   }
 }
@@ -144,12 +216,12 @@ class MatrixConfig {
     }
     return MatrixConfig(
       enabled: readBool(json, 'enabled', file: file, path: path),
-      opacity: readDouble(json, 'opacity', file: file, path: path),
-      speed: readDouble(json, 'speed', file: file, path: path),
-      fontSize: readDouble(json, 'fontSize', file: file, path: path),
+      opacity: _fraction(json, 'opacity', file: file, path: path),
+      speed: _positiveNumber(json, 'speed', file: file, path: path),
+      fontSize: _positiveNumber(json, 'fontSize', file: file, path: path),
       color: color,
-      trailLength: readInt(json, 'trailLength', file: file, path: path),
-      maxLayerOpacity: readDouble(json, 'maxLayerOpacity', file: file, path: path),
+      trailLength: _positiveInt(json, 'trailLength', file: file, path: path),
+      maxLayerOpacity: _fraction(json, 'maxLayerOpacity', file: file, path: path),
     );
   }
 }
