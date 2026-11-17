@@ -57,6 +57,11 @@ void main() {
     await tester.pumpWidget(wrap(panel()));
     await tester.pumpAndSettle();
 
+    // Focus a tab first: the row must not grab focus on load, or it would
+    // swallow the arrow keys from page scrolling.
+    await tester.tap(find.text('Skills'));
+    await tester.pumpAndSettle();
+
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
     await tester.pumpAndSettle();
     expect(find.text('BelgiumCampus iTversity — Software Engineering'), findsOneWidget);
@@ -109,4 +114,16 @@ void main() {
       0,
     );
   });
+
+  testWidgets('the tab row does not take focus on load', (tester) async {
+    await tester.pumpWidget(wrap(panel()));
+    await tester.pumpAndSettle();
+
+    // Nothing is focused yet, so the arrow key belongs to the page, not the tabs.
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pumpAndSettle();
+    expect(find.text('Frontend'), findsOneWidget);
+    expect(find.text('BelgiumCampus iTversity — Software Engineering'), findsNothing);
+  });
+
 }
