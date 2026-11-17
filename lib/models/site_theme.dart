@@ -35,7 +35,19 @@ class SiteColors {
   final Color panel;
 
   factory SiteColors.fromJson(Map<String, dynamic> json, {required String file, String path = ''}) {
-    Color color(String key) => parseHexColor(readString(json, key, file: file, path: path));
+    Color color(String key) {
+      final raw = readString(json, key, file: file, path: path);
+      try {
+        return parseHexColor(raw);
+      } on FormatException catch (e) {
+        throw DataException(
+          file: file,
+          path: joinPath(path, key),
+          message: 'invalid colour: ${e.message}',
+        );
+      }
+    }
+
     return SiteColors(
       background: color('background'),
       text: color('text'),
@@ -119,12 +131,23 @@ class MatrixConfig {
   final double maxLayerOpacity;
 
   factory MatrixConfig.fromJson(Map<String, dynamic> json, {required String file, String path = ''}) {
+    final rawColor = readString(json, 'color', file: file, path: path);
+    final Color color;
+    try {
+      color = parseHexColor(rawColor);
+    } on FormatException catch (e) {
+      throw DataException(
+        file: file,
+        path: joinPath(path, 'color'),
+        message: 'invalid colour: ${e.message}',
+      );
+    }
     return MatrixConfig(
       enabled: readBool(json, 'enabled', file: file, path: path),
       opacity: readDouble(json, 'opacity', file: file, path: path),
       speed: readDouble(json, 'speed', file: file, path: path),
       fontSize: readDouble(json, 'fontSize', file: file, path: path),
-      color: parseHexColor(readString(json, 'color', file: file, path: path)),
+      color: color,
       trailLength: readInt(json, 'trailLength', file: file, path: path),
       maxLayerOpacity: readDouble(json, 'maxLayerOpacity', file: file, path: path),
     );
