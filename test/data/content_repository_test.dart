@@ -21,7 +21,7 @@ void main() {
     expect(content.profile.pdfs, hasLength(2));
     expect(content.profile.contact.email, 'barend.army@gmail.com');
 
-    expect(content.skills.items, hasLength(7));
+    expect(content.skills.items, hasLength(6));
     expect(content.skills.items.first.name, 'Frontend');
     expect(
       content.skills.items.first.detail,

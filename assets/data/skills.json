@@ -7,7 +7,6 @@
     { "name": "Databases", "detail": "MySQL, SQL Server, MongoDB" },
     { "name": "Game development", "detail": "Unity" },
     { "name": "DevOps", "detail": "Docker, CI/CD pipelines" },
-    { "name": "Emerging tech", "detail": "VR, AR, drone programming" },
     { "name": "Temporal", "detail": "Durable code execution" }
   ]
 }
