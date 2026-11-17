@@ -179,11 +179,14 @@ class MatrixRainPainter extends CustomPainter {
       final trail = rain.trailFor(column);
       for (var i = trail.length - 1; i >= 0; i--) {
         final glyph = trail[i];
-        final faded = i == 0 ? opacity : opacity * (1 - i / (config.trailLength + 1)) * 0.6;
+        final faded = opacity * (1 - (i + 1) / (config.trailLength + 1)) * 0.8;
         if (faded <= 0.002) continue;
         final painter = _textPainter(glyph.char, glyph.fontSize, (faded * 50).round(), faded);
         painter.paint(canvas, Offset(x, glyph.y * config.fontSize));
       }
+
+      final headPainter = _textPainter(head.char, head.fontSize, 1000, opacity);
+      headPainter.paint(canvas, Offset(x, head.y * config.fontSize));
     }
   }
 

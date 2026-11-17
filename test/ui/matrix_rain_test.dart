@@ -35,13 +35,54 @@ void main() {
     expect(rain.glyphs.every((g) => g.y < 150), isTrue);
   });
 
-  test('trail never exceeds trailLength and head is first', () {
+  test('trail never exceeds trailLength and never contains the head cell', () {
     final rain = MatrixRain(width: 160, height: 100, config: cfg, seed: 1);
-    for (var i = 0; i < 30; i++) {
+    for (var i = 0; i < 200; i++) {
       rain.advance(0.2);
     }
     expect(rain.trailFor(0).length, lessThanOrEqualTo(cfg.trailLength));
-    expect(rain.trailFor(0).first.char, rain.glyphs.firstWhere((g) => g.column == 0).char);
+    final head = rain.glyphs.firstWhere((g) => g.column == 0);
+    expect(rain.trailFor(0).every((g) => g.y < head.y), isTrue);
+  });
+
+  test('a glyph holds its character for as long as it stays in one cell', () {
+    final rain = MatrixRain(width: 160, height: 100, config: cfg, seed: 1);
+    const column = 4;
+
+    MatrixGlyph head() =>
+        rain.glyphs.firstWhere((g) => g.column == column);
+
+    var charNow = head().char;
+    var cell = head().y.floor();
+    var crossings = 0;
+
+    for (var i = 0; i < 200; i++) {
+      rain.advance(0.01);
+      final next = head();
+      final nextCell = next.y.floor();
+      if (nextCell != cell) {
+        crossings++;
+        expect(next.char, isNot(charNow),
+            reason: 'a new cell should get a fresh character');
+        charNow = next.char;
+        cell = nextCell;
+      } else {
+        expect(next.char, charNow,
+            reason: 'a glyph must not flicker while it is in the same cell');
+      }
+    }
+
+    expect(crossings, greaterThan(4));
+  });
+
+  test('trail entries keep their own character', () {
+    final rain = MatrixRain(width: 160, height: 100, config: cfg, seed: 1);
+    for (var i = 0; i < 200; i++) {
+      rain.advance(0.2);
+    }
+    final trail = rain.trailFor(6);
+    expect(trail, isNotEmpty);
+    expect(trail.map((g) => g.char).toSet().length, greaterThan(1));
   });
 
   test('trail sits behind the head, brightest first', () {

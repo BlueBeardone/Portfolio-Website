@@ -29,6 +29,8 @@ class _Column {
     required this.fontSize,
     required this.layer,
     required this.y,
+    required this.char,
+    required this.cell,
     required this.trail,
   });
 
@@ -37,7 +39,15 @@ class _Column {
   final double fontSize;
   final int layer;
 
-  /// Newest first.
+  /// The character currently shown at the head. It only changes when the head
+  /// moves into the next character cell, so glyphs read as glyphs instead of
+  /// flickering into a trail of light.
+  String char;
+
+  /// Integer cell the head currently occupies.
+  int cell;
+
+  /// Cells already passed, newest first. Each keeps the character it displayed.
   final List<MatrixGlyph> trail;
 }
 
@@ -63,16 +73,16 @@ class MatrixRain {
 
   List<MatrixGlyph> get glyphs => [
         for (var i = 0; i < _columns.length; i++)
-          if (_columns[i].trail.isNotEmpty)
-            MatrixGlyph(
-              column: i,
-              y: _columns[i].y,
-              char: _columns[i].trail.first.char,
-              layer: _columns[i].layer,
-              fontSize: _columns[i].fontSize,
-            ),
+          MatrixGlyph(
+            column: i,
+            y: _columns[i].y,
+            char: _columns[i].char,
+            layer: _columns[i].layer,
+            fontSize: _columns[i].fontSize,
+          ),
       ];
 
+  /// The cells already passed above [column]'s head, newest first.
   List<MatrixGlyph> trailFor(int column) {
     if (column < 0 || column >= _columns.length) return const [];
     return List.unmodifiable(_columns[column].trail);
@@ -91,21 +101,29 @@ class MatrixRain {
     for (var index = 0; index < _columns.length; index++) {
       final column = _columns[index];
       column.y += column.speed * dtSeconds * 60 / config.fontSize;
+
       if (column.y * config.fontSize > _height * 1.5) {
-        _reset(column, aboveTop: true);
+        _reset(column, index);
+        continue;
       }
-      column.trail.insert(
-        0,
-        MatrixGlyph(
-          column: index,
-          y: column.y,
-          char: _randomChar(),
-          layer: column.layer,
-          fontSize: column.fontSize,
-        ),
-      );
-      if (column.trail.length > config.trailLength) {
-        column.trail.removeRange(config.trailLength, column.trail.length);
+
+      final cell = column.y.floor();
+      while (column.cell < cell) {
+        column.cell++;
+        column.trail.insert(
+          0,
+          MatrixGlyph(
+            column: index,
+            y: column.cell.toDouble(),
+            char: column.char,
+            layer: column.layer,
+            fontSize: column.fontSize,
+          ),
+        );
+        column.char = _randomChar();
+        if (column.trail.length > config.trailLength) {
+          column.trail.removeRange(config.trailLength, column.trail.length);
+        }
       }
     }
   }
@@ -116,28 +134,26 @@ class MatrixRain {
     if (!config.enabled) return;
     final count = (width / config.fontSize).ceil();
     for (var i = 0; i < count; i++) {
-      final column = _Column(
-        speed: (0.5 + _random.nextDouble() * 1.5) * config.speed,
-        fontSize: config.fontSize + _random.nextDouble() * 8,
-        layer: _random.nextInt(4),
-        y: -_random.nextDouble() * height / config.fontSize,
-        trail: [],
-      );
-      column.trail.add(
-        MatrixGlyph(
-          column: i,
-          y: column.y,
+      final startY = -_random.nextDouble() * height / config.fontSize;
+      _columns.add(
+        _Column(
+          speed: (0.5 + _random.nextDouble() * 1.5) * config.speed,
+          fontSize: config.fontSize + _random.nextDouble() * 8,
+          layer: _random.nextInt(4),
+          y: startY,
           char: _randomChar(),
-          layer: column.layer,
-          fontSize: column.fontSize,
+          cell: startY.floor(),
+          trail: [],
         ),
       );
-      _columns.add(column);
     }
   }
 
-  void _reset(_Column column, {required bool aboveTop}) {
-    column.y = aboveTop ? -_random.nextDouble() * 20 - 1 : column.y;
+  void _reset(_Column column, int index) {
+    final startY = -_random.nextDouble() * 20 - 1;
+    column.y = startY;
+    column.cell = startY.floor();
+    column.char = _randomChar();
     column.trail.clear();
   }
 
