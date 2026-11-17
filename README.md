@@ -16,8 +16,14 @@ All the copy lives in `assets/data/`:
 | `about.json` | The About tab |
 | `theme.json` | Colours, sizes, and the matrix rain settings |
 
-Edit a file, save, and the dev server hot-reloads. If you break the JSON, the
-page shows an error naming the file and field instead of going blank.
+Edit a file, save, and press `r` in the terminal to hot restart — the content
+is loaded once at startup, so a hot reload alone will not pick up new copy. If
+you break the JSON, the page shows an error naming the file and field instead of
+going blank.
+
+Every key in `theme.json` is required, and the numbers are range-checked (a font
+size or breakpoint of zero is rejected rather than blanking the page). Colours
+are `#RRGGBB` or `#AARRGGBB`; opacities and width factors are between 0 and 1.
 
 The PDFs are in `assets/pdf/`. Replace them in place and keep the file names in
 `profile.json` in sync.
