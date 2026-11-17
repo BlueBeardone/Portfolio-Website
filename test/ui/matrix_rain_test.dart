@@ -1,3 +1,5 @@
+import 'dart:ui' show PictureRecorder;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:portfolio/models/site_theme.dart';
@@ -151,5 +153,20 @@ void main() {
     );
     expect(find.text('content'), findsOneWidget);
     expect(find.byType(CustomPaint), findsWidgets);
+  });
+
+  test('the glyph painter cache stays bounded over many frames', () {
+    final rain = MatrixRain(width: 1280, height: 800, config: cfg, seed: 1);
+    final painter = MatrixRainPainter(rain: rain, config: cfg);
+    final recorder = PictureRecorder();
+    final canvas = Canvas(recorder);
+
+    for (var i = 0; i < 600; i++) {
+      rain.advance(1 / 60);
+      painter.paint(canvas, const Size(1280, 800));
+    }
+
+    expect(painter.cacheSize, lessThanOrEqualTo(MatrixRainPainter.maxCacheEntries));
+    expect(painter.cacheSize, lessThan(600));
   });
 }

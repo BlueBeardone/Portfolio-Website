@@ -4,6 +4,10 @@ import 'package:flutter/scheduler.dart';
 import '../models/site_theme.dart';
 import 'matrix_rain.dart';
 
+/// Bundled katakana subset; see `pubspec.yaml`. Using a generic family here
+/// silently reintroduces a runtime Google Fonts fetch.
+const String matrixFontFamily = 'MatrixGlyphs';
+
 /// Paints the matrix rain behind [child].
 ///
 /// The rain repaints on its own [Listenable] so the child subtree is never
@@ -148,22 +152,40 @@ class MatrixRainPainter extends CustomPainter {
 
   final Map<String, TextPainter> _cache = {};
 
-  TextPainter _textPainter(String char, double fontSize, int bucket, double opacity) {
-    final key = '$char|${fontSize.round()}|$bucket';
-    return _cache.putIfAbsent(key, () {
-      final painter = TextPainter(
-        text: TextSpan(
-          text: char,
-          style: TextStyle(
-            fontFamily: 'monospace',
-            fontSize: fontSize,
-            color: config.color.withValues(alpha: opacity),
-          ),
+  /// Laid-out glyphs are expensive to rebuild, but the fade means every trail
+  /// position would otherwise get its own painter — thousands of paragraphs
+  /// held for the life of the page. Sizes and opacities are quantized to a few
+  /// steps and the cache is capped, so memory stays flat without visible banding.
+  static const int maxCacheEntries = 500;
+
+  int get cacheSize => _cache.length;
+
+  TextPainter _textPainter(String char, double fontSize, double opacity) {
+    final sizeStep = ((fontSize / 3).round() * 3).toDouble();
+    final alphaStep = (opacity * 4).round().clamp(1, 4);
+    final key = '$char|$sizeStep|$alphaStep';
+    final cached = _cache.remove(key);
+    if (cached != null) {
+      // Re-insert so the eviction order stays least-recently-used.
+      _cache[key] = cached;
+      return cached;
+    }
+    final painter = TextPainter(
+      text: TextSpan(
+        text: char,
+        style: TextStyle(
+          fontFamily: matrixFontFamily,
+          fontSize: sizeStep,
+          color: config.color.withValues(alpha: alphaStep / 4),
         ),
-        textDirection: TextDirection.ltr,
-      )..layout();
-      return painter;
-    });
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    if (_cache.length >= maxCacheEntries) {
+      _cache.remove(_cache.keys.first);
+    }
+    _cache[key] = painter;
+    return painter;
   }
 
   @override
@@ -181,11 +203,11 @@ class MatrixRainPainter extends CustomPainter {
         final glyph = trail[i];
         final faded = opacity * (1 - (i + 1) / (config.trailLength + 1)) * 0.8;
         if (faded <= 0.002) continue;
-        final painter = _textPainter(glyph.char, glyph.fontSize, (faded * 50).round(), faded);
+        final painter = _textPainter(glyph.char, glyph.fontSize, faded);
         painter.paint(canvas, Offset(x, glyph.y * config.fontSize));
       }
 
-      final headPainter = _textPainter(head.char, head.fontSize, 1000, opacity);
+      final headPainter = _textPainter(head.char, head.fontSize, opacity);
       headPainter.paint(canvas, Offset(x, head.y * config.fontSize));
     }
   }
