@@ -1,0 +1,29 @@
+{
+  "_hint": "The About tab. The intro is one paragraph; each group is a heading plus bullets.",
+  "intro": "Creative problem-solver with a passion for game development and interactive experiences.",
+  "groups": [
+    {
+      "title": "Personal Interests",
+      "items": [
+        "Game development: indie projects in Unreal Engine and Unity",
+        "Technology exploration: VR, drone tech, AI and emerging technologies"
+      ]
+    },
+    {
+      "title": "Values",
+      "items": [
+        "Committed to writing clean, maintainable code and building digital experiences that make a difference."
+      ]
+    },
+    {
+      "title": "Currently Learning",
+      "items": [
+        "Advanced Unity development",
+        "Raspberry Pi development and electronics",
+        "Cloud computing with AWS",
+        "Advanced machine learning",
+        "Temporal for durable code that does not depend on external services"
+      ]
+    }
+  ]
+}

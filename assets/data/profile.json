@@ -1,0 +1,18 @@
+{
+  "_hint": "Everything in the left panel. Edit the text, save, and rerun the app.",
+  "kicker": "Portfolio / 2026",
+  "name": "Barend Blom",
+  "role": "Software Developer",
+  "location": "Gauteng, South Africa",
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/BlueBeardone" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/barend-blom-980b53265/" },
+    { "label": "itch.io", "url": "https://itch.io/profile/4shblue" }
+  ],
+  "contact": { "email": "barend.army@gmail.com", "phone": "+27 72 919 9443" },
+  "pdfs": [
+    { "label": "Download CV", "asset": "assets/pdf/Barend_Blom_CV.pdf" },
+    { "label": "Download Grades", "asset": "assets/pdf/GR12_Graduation_Marks.pdf" }
+  ],
+  "tabs": ["Skills", "History", "About"]
+}

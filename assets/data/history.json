@@ -1,0 +1,44 @@
+{
+  "_hint": "The History tab. Groups appear in this order; entries in each group appear in theirs.",
+  "groups": [
+    {
+      "title": "Education",
+      "entries": [
+        {
+          "title": "BelgiumCampus iTversity — Software Engineering",
+          "meta": "2023 — present",
+          "description": "Studying software engineering with a focus on system design and development principles."
+        }
+      ]
+    },
+    {
+      "title": "Work Experience",
+      "entries": [
+        {
+          "title": "VR and Drone Technologies — Software Developer",
+          "meta": "2025",
+          "description": "Developing software for VR applications and drone control systems."
+        },
+        {
+          "title": "Freelance Developer",
+          "meta": "2024 — present",
+          "description": "Custom web solutions and database applications for local businesses."
+        },
+        {
+          "title": "Eps-Mathu — Junior Developer",
+          "meta": "2026 — present",
+          "description": "Assisting in developing a website and database management system."
+        }
+      ]
+    },
+    {
+      "title": "Achievements",
+      "entries": [
+        { "title": "Contributed to projects on GitHub", "meta": "", "description": "" },
+        { "title": "Participated in 3 hackathons and a few game jams", "meta": "", "description": "" },
+        { "title": "Completed technical webinars on emerging technologies", "meta": "", "description": "" },
+        { "title": "Completed the Temporal Fundamentals Certification", "meta": "", "description": "" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "_hint": "Colours, sizes and matrix settings. Colours are #RRGGBB or #AARRGGBB.",
+  "colors": {
+    "background": "#07090A",
+    "text": "#EEF2F0",
+    "muted": "#8EA79A",
+    "hairline": "#14FFFFFF",
+    "accent": "#4ADE80",
+    "accentSecondary": "#22D3EE",
+    "panel": "#0B0F0D"
+  },
+  "layout": {
+    "breakpoint": 900,
+    "maxContentWidth": 1200,
+    "pagePadding": 24,
+    "identityWidthFactor": 0.4
+  },
+  "type": {
+    "heroDesktop": 88,
+    "heroMobile": 44,
+    "nameTracking": -2,
+    "bodySize": 15,
+    "smallSize": 12
+  },
+  "matrix": {
+    "enabled": true,
+    "opacity": 1.0,
+    "speed": 1.0,
+    "fontSize": 16,
+    "color": "#4ADE80",
+    "trailLength": 8,
+    "maxLayerOpacity": 0.28
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "_hint": "The Skills tab. Add or remove items freely; order is the order shown.",
+  "highlight": "Specialised in full-stack development",
+  "items": [
+    { "name": "C# & .NET", "detail": "Advanced application development" },
+    { "name": "Web", "detail": "HTML5, CSS3, JavaScript (ES6+)" },
+    { "name": "Databases", "detail": "MySQL, SQL Server, MongoDB" },
+    { "name": "Python", "detail": "Data analysis and automation" },
+    { "name": "Game development", "detail": "Unity, Unreal Engine" },
+    { "name": "Frontend frameworks", "detail": "React, Vue.js" },
+    { "name": "Backend", "detail": "Node.js, Express" },
+    { "name": "Cloud", "detail": "Azure, AWS" },
+    { "name": "DevOps", "detail": "Docker, CI/CD pipelines" },
+    { "name": "Emerging tech", "detail": "VR, AR, drone programming" },
+    { "name": "Temporal", "detail": "Durable code execution" }
+  ]
+}
