@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  url_launcher: ^6.3.0
   web: ^1.0.0
 
 dev_dependencies:
@@ -32,3 +31,9 @@ flutter:
     - family: SpaceGrotesk
       fonts:
         - asset: assets/fonts/SpaceGrotesk.ttf
+    # Katakana subset for the matrix rain. Neither Inter nor SpaceGrotesk has
+    # katakana, and relying on the browser to fetch Noto at runtime leaves the
+    # rain as tofu boxes on the first frames.
+    - family: MatrixGlyphs
+      fonts:
+        - asset: assets/fonts/MatrixGlyphs.ttf
