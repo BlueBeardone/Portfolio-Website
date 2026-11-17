@@ -8,6 +8,16 @@ services:
       - key: FLUTTER_VERSION
         value: 3.47.0
     headers:
-      - path: /assets/*
+      # Content and PDFs are edited in place and redeployed. Caching them as
+      # immutable would keep returning visitors on old copy for up to a year,
+      # so they revalidate on every load instead.
+      - path: /assets/assets/data/*
+        name: Cache-Control
+        value: no-cache
+      - path: /assets/assets/pdf/*
+        name: Cache-Control
+        value: no-cache
+      # Fonts only change when the app is rebuilt, so they can be cached hard.
+      - path: /assets/assets/fonts/*
         name: Cache-Control
         value: public, max-age=31536000, immutable
