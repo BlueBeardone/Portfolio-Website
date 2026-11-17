@@ -20,7 +20,7 @@ void main() {
 
   testWidgets('opens on the first tab and shows only skills', (tester) async {
     await tester.pumpWidget(wrap(panel()));
-    expect(find.text('C# & .NET'), findsOneWidget);
+    expect(find.text('Frontend'), findsOneWidget);
     expect(find.text('BelgiumCampus iTversity — Software Engineering'), findsNothing);
     expect(find.textContaining('Specialised in full-stack'), findsOneWidget);
   });
@@ -31,7 +31,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('BelgiumCampus iTversity — Software Engineering'), findsOneWidget);
-    expect(find.text('C# & .NET'), findsNothing);
+    expect(find.text('Frontend'), findsNothing);
     expect(find.text('Education'), findsOneWidget);
     expect(find.text('Work Experience'), findsOneWidget);
   });

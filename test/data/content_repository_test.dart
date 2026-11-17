@@ -21,8 +21,10 @@ void main() {
     expect(content.profile.pdfs, hasLength(2));
     expect(content.profile.contact.email, 'barend.army@gmail.com');
 
-    expect(content.skills.items, hasLength(11));
-    expect(content.skills.items.first.name, 'C# & .NET');
+    expect(content.skills.items, hasLength(7));
+    expect(content.skills.items.first.name, 'Frontend');
+    expect(content.skills.items.first.detail, contains('Flutter'));
+    expect(content.skills.items[1].detail, contains('RESTful APIs'));
     expect(content.skills.highlight, contains('full-stack'));
 
     expect(
