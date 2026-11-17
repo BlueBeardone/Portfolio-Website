@@ -35,6 +35,22 @@ class ContentPanel extends StatefulWidget {
 class _ContentPanelState extends State<ContentPanel> {
   int _index = 0;
 
+  /// Owned here so a tab switch can put the new section back at the top. A
+  /// switching tab that inherits the previous scroll offset opens mid-article.
+  final ScrollController _scroll = ScrollController();
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  void _select(int index) {
+    if (index == _index) return;
+    setState(() => _index = index);
+    if (_scroll.hasClients) _scroll.jumpTo(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     final body = AnimatedSwitcher(
@@ -69,13 +85,15 @@ class _ContentPanelState extends State<ContentPanel> {
           labels: widget.tabs,
           selected: _index,
           accent: widget.theme.colors.accent,
-          onSelect: (i) => setState(() => _index = i),
+          onSelect: _select,
         ),
         const SizedBox(height: 10),
         Hairline(color: widget.theme.colors.hairline),
         const SizedBox(height: 8),
         if (widget.scrollable)
-          Expanded(child: SingleChildScrollView(child: body))
+          Expanded(
+            child: SingleChildScrollView(controller: _scroll, child: body),
+          )
         else
           body,
       ],

@@ -89,4 +89,24 @@ void main() {
 
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('switching tabs starts the new tab at the top', (tester) async {
+    await tester.pumpWidget(wrap(panel(), size: const Size(600, 400)));
+    await tester.pumpAndSettle();
+
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, -250));
+    await tester.pumpAndSettle();
+    expect(
+      tester.state<ScrollableState>(find.byType(Scrollable).first).position.pixels,
+      greaterThan(0),
+    );
+
+    await tester.tap(find.text('About'));
+    await tester.pumpAndSettle();
+
+    expect(
+      tester.state<ScrollableState>(find.byType(Scrollable).first).position.pixels,
+      0,
+    );
+  });
 }
