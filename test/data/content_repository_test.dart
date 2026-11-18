@@ -21,13 +21,17 @@ void main() {
     expect(content.profile.pdfs, hasLength(2));
     expect(content.profile.contact.email, 'barend.army@gmail.com');
 
-    expect(content.skills.items, hasLength(6));
-    expect(content.skills.items.first.name, 'Frontend');
+    expect(content.skills.items, hasLength(5));
+    final web = content.skills.items.first;
+    expect(web.name, 'Web Development');
+    expect(web.detail, isEmpty);
+    expect(web.children.map((c) => c.name), ['Frontend', 'Backend']);
     expect(
-      content.skills.items.first.detail,
+      web.children.first.detail,
       'HTML5, CSS3, JavaScript (ES6+), React, Flutter',
     );
-    expect(content.skills.items[1].detail, contains('RESTful APIs'));
+    expect(web.children.last.detail, contains('RESTful APIs'));
+    expect(content.skills.items[1].children, isEmpty);
     expect(content.skills.highlight, contains('full-stack'));
 
     expect(
@@ -38,6 +42,12 @@ void main() {
     expect(achievements, hasLength(4));
     expect(achievements.first.meta, isEmpty);
     expect(achievements.first.description, isEmpty);
+
+    final work = content.history.groups[1].entries;
+    expect(work.last.title, 'Eps-Mathu — Junior Developer');
+    expect(work.last.children.map((c) => c.title), ['Mastery by MathU']);
+    expect(work.last.children.first.description, contains('School assistant'));
+    expect(work.first.children, isEmpty);
 
     expect(
       content.about.groups.map((g) => g.title),

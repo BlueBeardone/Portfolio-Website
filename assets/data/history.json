@@ -15,11 +15,6 @@
       "title": "Work Experience",
       "entries": [
         {
-          "title": "VR and Drone Technologies — Software Developer",
-          "meta": "2025",
-          "description": "Developing software for VR applications and drone control systems."
-        },
-        {
           "title": "Freelance Developer",
           "meta": "2024 — present",
           "description": "Custom web solutions and database applications for local businesses."
@@ -27,7 +22,13 @@
         {
           "title": "Eps-Mathu — Junior Developer",
           "meta": "2026 — present",
-          "description": "Assisting in developing a website and database management system."
+          "description": "Assisting in developing a website and database management system.",
+          "children": [
+            {
+              "title": "Mastery by MathU",
+              "description": "School assistant website built for MathU, used by students and staff."
+            }
+          ]
         }
       ]
     },

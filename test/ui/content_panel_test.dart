@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:portfolio/ui/content_panel.dart';
+import 'package:portfolio/ui/widgets/hairline.dart';
+import 'package:portfolio/ui/widgets/numbered_row.dart';
 
 import '../support/fixtures.dart';
 
@@ -20,9 +22,21 @@ void main() {
 
   testWidgets('opens on the first tab and shows only skills', (tester) async {
     await tester.pumpWidget(wrap(panel()));
+    expect(find.text('Web Development'), findsOneWidget);
     expect(find.text('Frontend'), findsOneWidget);
     expect(find.text('BelgiumCampus iTversity — Software Engineering'), findsNothing);
     expect(find.textContaining('Specialised in full-stack'), findsOneWidget);
+  });
+
+  testWidgets('children render under their parent, without their own rule', (tester) async {
+    await tester.pumpWidget(wrap(panel()));
+
+    expect(find.text('Backend'), findsOneWidget);
+    // One numbered row per top-level item; children are not numbered.
+    expect(find.byType(NumberedRow), findsNWidgets(sampleSkills.items.length));
+    // Hairlines: one under the tab row plus one between top-level items.
+    expect(find.byType(Hairline), findsNWidgets(sampleSkills.items.length));
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('tapping History swaps content and hides skills', (tester) async {
@@ -83,6 +97,18 @@ void main() {
     expect(find.text('Contributed to projects on GitHub'), findsOneWidget);
     expect(tester.takeException(), isNull);
     expect(find.text(''), findsNothing);
+  });
+
+  testWidgets('a work entry renders its product as an indented child', (tester) async {
+    await tester.pumpWidget(wrap(panel()));
+    await tester.tap(find.text('History'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Mastery by MathU'), findsOneWidget);
+    expect(find.textContaining('School assistant website'), findsOneWidget);
+    // Numbers count entries, not their children.
+    final entries = sampleHistory.groups.expand((g) => g.entries).length;
+    expect(find.byType(NumberedRow), findsNWidgets(entries));
   });
 
   testWidgets('long content scrolls without overflow on a narrow panel', (tester) async {

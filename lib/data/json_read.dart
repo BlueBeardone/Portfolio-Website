@@ -96,6 +96,18 @@ List<dynamic> readList(
   return value;
 }
 
+/// Like [readList], but an absent key yields an empty list. For optional
+/// sub-collections that older data files do not have yet.
+List<dynamic> readOptionalList(
+  Map<String, dynamic> json,
+  String key, {
+  required String file,
+  String path = '',
+}) {
+  if (!json.containsKey(key) || json[key] == null) return const [];
+  return readList(json, key, file: file, path: path);
+}
+
 List<String> readStringList(
   Map<String, dynamic> json,
   String key, {

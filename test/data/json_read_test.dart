@@ -57,6 +57,21 @@ void main() {
     });
   });
 
+  group('readOptionalList', () {
+    test('returns an empty list when absent', () {
+      expect(readOptionalList({'a': 'x'}, 'children', file: 'p.json'), isEmpty);
+    });
+
+    test('rejects a non-list value', () {
+      expect(
+        () => readOptionalList({'children': 'nope'}, 'children', file: 'p.json'),
+        throwsA(isA<DataException>()
+            .having((e) => e.path, 'path', 'children')
+            .having((e) => e.message, 'message', contains('list'))),
+      );
+    });
+  });
+
   group('readStringList', () {
     test('rejects a non-string member', () {
       expect(

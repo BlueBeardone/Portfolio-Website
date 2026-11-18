@@ -6,6 +6,7 @@ import '../models/site_theme.dart';
 import '../models/skills.dart';
 import 'tab_row.dart';
 import 'widgets/hairline.dart';
+import 'widgets/indented_child_row.dart';
 import 'widgets/numbered_row.dart';
 
 class ContentPanel extends StatefulWidget {
@@ -119,11 +120,7 @@ class _ContentPanelState extends State<ContentPanel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (var i = 0; i < widget.skills.items.length; i++) ...[
-            NumberedRow(
-              index: (i + 1).toString().padLeft(2, '0'),
-              title: widget.skills.items[i].name,
-              description: widget.skills.items[i].detail,
-            ),
+            _skillRow(widget.skills.items[i], (i + 1).toString().padLeft(2, '0')),
             if (i < widget.skills.items.length - 1) Hairline(color: theme.colors.hairline),
           ],
           if (widget.skills.highlight.isNotEmpty)
@@ -146,6 +143,34 @@ class _ContentPanelState extends State<ContentPanel> {
             ),
         ],
       ),
+    );
+  }
+
+  Widget _skillRow(SkillItem item, String index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      key: ValueKey<String>(item.name),
+      children: [
+        NumberedRow(index: index, title: item.name, description: item.detail),
+        if (item.children.isNotEmpty)
+          Padding(
+            // Indented past the number column so the children read as part of
+            // this entry rather than as entries of their own.
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (var i = 0; i < item.children.length; i++) ...[
+                  if (i > 0) const SizedBox(height: 8),
+                  IndentedChildRow(
+                    title: item.children[i].name,
+                    description: item.children[i].detail,
+                  ),
+                ],
+              ],
+            ),
+          ),
+      ],
     );
   }
 
@@ -176,6 +201,22 @@ class _ContentPanelState extends State<ContentPanel> {
               meta: group.entries[i].meta,
               description: group.entries[i].description,
             ),
+            if (group.entries[i].children.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (var j = 0; j < group.entries[i].children.length; j++) ...[
+                      if (j > 0) const SizedBox(height: 8),
+                      IndentedChildRow(
+                        title: group.entries[i].children[j].title,
+                        description: group.entries[i].children[j].description,
+                      ),
+                    ],
+                  ],
+                ),
+              ),
             if (i < group.entries.length - 1) Hairline(color: theme.colors.hairline),
           ],
         ],

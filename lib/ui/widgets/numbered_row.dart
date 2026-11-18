@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Width of the index column. Callers indent content beneath the title by this.
+const double numberedRowIndexWidth = 34;
+
 /// A hairline-separated row used by the Skills and History lists.
 class NumberedRow extends StatelessWidget {
   const NumberedRow({
@@ -30,7 +33,7 @@ class NumberedRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 34,
+            width: numberedRowIndexWidth,
             child: Text(index, style: theme.textTheme.bodySmall?.copyWith(color: muted)),
           ),
           Expanded(

@@ -19,9 +19,10 @@
       "title": "Currently Learning",
       "items": [
         "Advanced Unity development",
-        "Raspberry Pi development and electronics",
-        "Cloud computing with AWS",
-        "Advanced machine learning",
+        "Linux home server building: running and maintaining my own Linux server for hosting and storage",
+        "Kubernetes: orchestrating and scaling containerised services",
+        "Software architectures: designing systems that stay maintainable as they grow",
+        "Multiple database usages: a queue database such as Kafka alongside normal storage databases like MongoDB and Redis",
         "Temporal for durable code that does not depend on external services"
       ]
     }
