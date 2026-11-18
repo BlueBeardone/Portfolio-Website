@@ -23,6 +23,7 @@
         "Kubernetes: orchestrating and scaling containerised services",
         "Software architectures: designing systems that stay maintainable as they grow",
         "Multiple database usages: a queue database such as Kafka alongside normal storage databases like MongoDB and Redis",
+        "Rust: systems programming with memory safety and no garbage collector",
         "Temporal for durable code that does not depend on external services"
       ]
     }
